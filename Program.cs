@@ -1,25 +1,31 @@
+using Internal_Resource_Booking_System.Data;
+using Microsoft.EntityFrameworkCore;
+
+//creates a web application builder that sets app's services
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add services to the container. Registers support for Razor Pages
 builder.Services.AddRazorPages();
 
+//Dependency Injection
+builder.Services.AddDbContext<AppDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionToDbServer")));
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
+app.UseHttpsRedirection(); //Http to Https
+app.UseStaticFiles();      //Javascript, Images
 
 app.UseRouting();
 
-app.UseAuthorization();
+app.UseAuthorization(); 
 
-app.MapRazorPages();
+app.MapRazorPages();    //Map Razor Pages
 
-app.Run();
+app.Run();              //Starts Http server
