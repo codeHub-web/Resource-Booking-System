@@ -7,7 +7,7 @@
 <h3>@ViewData["Title"]</h3>
 <hr />
 <p>
-    <a asp-asp-page="Create" class="btn btn-primary">Create</a>
+    <a asp-page="/Create" class="btn btn-primary">Create</a>
 </p>
 <table class="table table-success table-striped table-responsive table-hover">
     <thead>
@@ -28,7 +28,7 @@
                 @Html.DisplayNameFor(model => model.Resources[0].Capacity)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Resources[0].IsAvailable)
+                Available
             </th>
             <th>
                 Action
@@ -57,7 +57,7 @@
                         @Html.DisplayFor(item => resource.Capacity)
                     </td>
                     <td>
-                        @Html.DisplayFor(item => resource.IsAvailable)
+                        @(resource.IsAvailable ? "Yes" : "No")
                     </td>
                     <td>
                         <a asp-asp-page="./Update" asp-route-itemid="@resource.Id" class="btn btn-primary">Update</a>
@@ -70,7 +70,7 @@
         {
              <tr>
                  <td colspan="5" class="text-center">
-                     Resource not available!
+                     No resources available at the moment!
                  </td>
              </tr>           
         }

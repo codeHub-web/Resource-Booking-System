@@ -1,0 +1,44 @@
+﻿@page
+@model Internal_Resource_Booking_System.Pages.Resources.CreateModel
+@{
+    ViewData["Title"] = "Create a new Resource";
+}
+
+<h3>@ViewData["Title"]</h3>
+</hr>
+<div class = "row">         
+    <div class="col-md-4">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Resources.ResourceName" class="control-label"></label>
+                <input type="text" asp-for="Resources.ResourceName" class="form-control" />
+                <span asp-validation-for="Resources.ResourceName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Resources.Description" class="control-label"></label>
+                <input type="text" asp-for="Resources.Description" class="form-control" />
+                <span asp-validation-for="Resources.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Resources.Location" class="control-label"></label>
+                <input type="text" asp-for="Resources.Location" class="form-control" />
+                <span asp-validation-for="Resources.Location" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Resources.Capacity" class="control-label"></label>
+                <input type="number" asp-for="Resources.Capacity" class="form-control" />
+                <span asp-validation-for="Resources.Capacity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Resources.IsAvailable" class="control-label"></label>
+                <input type="text" asp-for="Resources.Capacity" class="form-control" />
+                <span asp-validation-for="Resources.Capacity" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <input type="submit" class="btn btn-primary" value="Create Resource" />
+                <a class="btn btn-success" asp-asp-page="Index">Resource List</a>
+            </div>
+        </form>
+    </div>
+
+</div>
