@@ -1,0 +1,79 @@
+﻿@page
+@model Internal_Resource_Booking_System.Pages.Resources.IndexModel
+@{
+    ViewData["Title"] = "Resource List";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+<p>
+    <a asp-asp-page="Create" class="btn btn-primary">Create</a>
+</p>
+<table class="table table-success table-striped table-responsive table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Resources[0].Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Resources[0].ResourceName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Resources[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Resources[0].Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Resources[0].Capacity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Resources[0].IsAvailable)
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(Model != null && Model.Resources.Any())
+        {
+            @foreach(var resource in Model.Resources)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(item => resource.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(item => resource.ResourceName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(item => resource.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(item => resource.Location)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(item => resource.Capacity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(item => resource.IsAvailable)
+                    </td>
+                    <td>
+                        <a asp-asp-page="./Update" asp-route-itemid="@resource.Id" class="btn btn-primary">Update</a>
+                        <a asp-asp-page="./Delete" asp-route-itemid="@resource.Id" class="btn btn-warning">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+             <tr>
+                 <td colspan="5" class="text-center">
+                     Resource not available!
+                 </td>
+             </tr>           
+        }
+    </tbody>
+
+</table>
