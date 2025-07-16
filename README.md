@@ -28,3 +28,7 @@ Before setting up the project, ensure the following are installed:
 
 ## Run the application
 - A Window should pop up on your browser
+
+## Issues Faced
+ - Resource Booking. Booking Data currently does not migrate to the Database
+ - Booking Logic needs data to be tested with data
