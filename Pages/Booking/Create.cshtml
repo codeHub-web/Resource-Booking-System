@@ -1,4 +1,49 @@
 ﻿@page
 @model Internal_Resource_Booking_System.Pages.Booking.CreateModel
 @{
+    ViewData["Title"] = "Book Resource";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (Model.Resource != null)
+{
+    <div class="mb-4">
+        <h4>Resource Details:</h4>
+        <p><strong>Name:</strong> @Model.Resource.ResourceName</p>
+        <p><strong>Description:</strong> @Model.Resource.Description</p>
+        <p><strong>Location:</strong> @Model.Resource.Location</p>
+        <p><strong>Capacity:</strong> @Model.Resource.Capacity</p>
+        <p><strong>Available:</strong> @(Model.Resource.IsAvailable ? "Yes" : "No")</p>
+    </div>
+}
+
+<form method="post">
+    <div class="form-group mb-3">
+        <label asp-for="Booking.StartTime"></label>
+        <input asp-for="Booking.StartTime" type="datetime-local" class="form-control" />
+        <span asp-validation-for="Booking.StartTime" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Booking.EndTime"></label>
+        <input asp-for="Booking.EndTime" type="datetime-local" class="form-control" />
+        <span asp-validation-for="Booking.EndTime" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Booking.BookedBy"></label>
+        <input asp-for="Booking.BookedBy" class="form-control" />
+        <span asp-validation-for="Booking.BookedBy" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Booking.Purpose"></label>
+        <input asp-for="Booking.Purpose" class="form-control" />
+        <span asp-validation-for="Booking.Purpose" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Confirm Booking</button>
+    <a asp-page="/Resources/Index" class="btn btn-secondary ms-2">Cancel</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 }

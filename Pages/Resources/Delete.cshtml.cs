@@ -8,16 +8,18 @@ namespace Internal_Resource_Booking_System.Pages.Resources
 {
     public class DeleteModel : PageModel
     {
+        //DB Context for Data Operations
         private AppDBContext _dbContext;
 
         public DeleteModel(AppDBContext dbContext)
         {
             _dbContext = dbContext;
         }
-
+        
         [BindProperty]
         public Resource Resources { get; set; }
 
+        //Handling GET request
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if(id == null) 
@@ -33,12 +35,14 @@ namespace Internal_Resource_Booking_System.Pages.Resources
             return Page();
         }
 
+        //Handles Post Request to delete resource
         public async Task<IActionResult> OnPostAsync(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
+            //
             var resource = await _dbContext.Resources.FindAsync(id);
 
             if (resource == null)

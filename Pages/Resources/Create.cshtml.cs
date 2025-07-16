@@ -5,8 +5,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Internal_Resource_Booking_System.Pages.Resources
 {
+    //Create Resource Logic
     public class CreateModel : PageModel
     {
+        //Dependency Injection for Database Interaction
         private readonly AppDBContext _dBContext;
 
         public CreateModel(AppDBContext dbContext)
@@ -17,11 +19,7 @@ namespace Internal_Resource_Booking_System.Pages.Resources
         {
         }
 
-        public IActionResult onGet() 
-        {
-            return Page();
-        }
-
+        //Binding form inputs to Resource
         [BindProperty]
         public Resource Resources { get; set; }
 
@@ -31,6 +29,7 @@ namespace Internal_Resource_Booking_System.Pages.Resources
             {
                 return Page();
             }
+
 
             _dBContext.Resources.Add(Resources);
             await _dBContext.SaveChangesAsync();

@@ -31,7 +31,7 @@
                 <span asp-validation-for="Resources.Capacity" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Resources.IsAvailable" class="control-label"></label>
+                <label asp-for="Resources.IsAvailable" class="control-label">Available?</label>
                 <select asp-for="Resources.IsAvailable" class="form-control">
                     <option value="true">Yes</option>
                     <option value="false">No</option>
@@ -40,7 +40,7 @@
             </div>
             <div class="form-group mt-2">
                 <input type="submit" class="btn btn-primary" value="Edit Resource" />
-                <a class="btn btn-success" asp-asp-page="Index">Resource List</a>
+                <a class="btn btn-success" asp-page="/Resources/Index">Resource List</a>
             </div>
         </form>
     </div>

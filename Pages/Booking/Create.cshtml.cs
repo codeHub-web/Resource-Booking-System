@@ -3,62 +3,71 @@ using Internal_Resource_Booking_System.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using BookingModel = Internal_Resource_Booking_System.Models.Booking;
 
+// Alias the model to avoid naming conflict with the Booking namespace
+using BookingModel = Internal_Resource_Booking_System.Models.Booking;
 
 namespace Internal_Resource_Booking_System.Pages.Booking
 {
+    //Create Booking Logic
     public class CreateModel : PageModel
     {
-        private readonly AppDBContext _dbContext;
+        //Dependency Injection for Database Interaction
+        private readonly AppDBContext _dBContext;
 
         public CreateModel(AppDBContext dbContext)
         {
-            _dbContext = dbContext;
+            _dBContext = dbContext;
         }
 
+        //Binding form inputs to Booking
         [BindProperty]
         public BookingModel Booking { get; set; }
+
         public Resource Resource { get; set; }
 
+        //Handles GET request to initialize the form
         public async Task<IActionResult> OnGetAsync(int resourceId)
         {
-            Resource = await _dbContext.Resources.FindAsync(resourceId);
+            Resource = await _dBContext.Resources.FindAsync(resourceId);
+
+            if (Resource == null)
             {
-                if (Resource == null)
-                    return NotFound();
+                return NotFound();
             }
 
-            Booking = new Internal_Resource_Booking_System.Models.Booking
+            Booking = new BookingModel
             {
-                ResourceId = resourceId,
+                ResourceId = resourceId
             };
-        return Page();
+
+            return Page();
         }
 
+        //Handles POST request to submit the form
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || _dBContext.Bookings == null || Booking == null)
+            {
                 return Page();
+            }
 
-
-            //Detects conflicting bookings, and shows error
-            Boolean hasConflict = await _dbContext.Bookings.AnyAsync(b =>
-            b.ResourceId == Booking.ResourceId &&
-            b.EndTime > Booking.StartTime &&
-            b.StartTime < Booking.EndTime);
+            //Check for booking time conflict
+            bool hasConflict = await _dBContext.Bookings.AnyAsync(b =>
+                b.ResourceId == Booking.ResourceId &&
+                b.EndTime > Booking.StartTime &&
+                b.StartTime < Booking.EndTime);
 
             if (hasConflict)
             {
-                ModelState.AddModelError(string.Empty, "Resource is currently booked");
+                ModelState.AddModelError(string.Empty, "Resource is currently booked during the selected time.");
                 return Page();
             }
 
-            _dbContext.Bookings.Add(Booking);
-            await _dbContext.SaveChangesAsync();
+            _dBContext.Bookings.Add(Booking);
+            await _dBContext.SaveChangesAsync();
+
             return RedirectToPage(nameof(Index));
         }
-        
-        
     }
 }
