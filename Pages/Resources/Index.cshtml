@@ -7,10 +7,10 @@
 <h3>@ViewData["Title"]</h3>
 <hr />
 <p>
-    <a asp-page="/Create" class="btn btn-primary">Create</a>
+    <a asp-page="/Resources/Create" class="btn btn-primary">Create</a>
 </p>
 <table class="table table-success table-striped table-responsive table-hover">
-    <thead>
+    <thead class="table-dark">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Resources[0].Id)
@@ -60,8 +60,8 @@
                         @(resource.IsAvailable ? "Yes" : "No")
                     </td>
                     <td>
-                        <a asp-asp-page="./Update" asp-route-itemid="@resource.Id" class="btn btn-primary">Update</a>
-                        <a asp-asp-page="./Delete" asp-route-itemid="@resource.Id" class="btn btn-warning">Delete</a>
+                        <a asp-page="/Resources/Edit" asp-route-id="@resource.Id" class="btn btn-primary">Update</a>
+                        <a asp-page="" asp-route-id="@resource.Id" class="btn btn-warning">Delete</a>
                     </td>
                 </tr>
             }

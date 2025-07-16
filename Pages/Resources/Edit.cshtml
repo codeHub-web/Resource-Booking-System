@@ -1,14 +1,15 @@
 ﻿@page
-@model Internal_Resource_Booking_System.Pages.Resources.CreateModel
+@model Internal_Resource_Booking_System.Pages.Resources.EditModel
 @{
-    ViewData["Title"] = "Create a new Resource";
+    ViewData["Title"] = "Edit";
 }
 
 <h3>@ViewData["Title"]</h3>
-</hr>
-<div class = "row shadow">         
+<hr />
+<div class="row shadow">
     <div class="col-md-4">
         <form method="post">
+            <input type="hidden" asp-for="Resources.Id" />
             <div class="form-group">
                 <label asp-for="Resources" class="control-label">Name</label>
                 <input type="text" asp-for="Resources.ResourceName" class="form-control" />
@@ -29,16 +30,16 @@
                 <input type="number" asp-for="Resources.Capacity" class="form-control" />
                 <span asp-validation-for="Resources.Capacity" class="text-danger"></span>
             </div>
-            @*<div class="form-group">
+            <div class="form-group">
                 <label asp-for="Resources.IsAvailable" class="control-label"></label>
                 <select asp-for="Resources.IsAvailable" class="form-control">
                     <option value="true">Yes</option>
                     <option value="false">No</option>
                 </select>
                 <span asp-validation-for="Resources.IsAvailable" class="text-danger"></span>
-            </div>*@
+            </div>
             <div class="form-group mt-2">
-                <input type="submit" class="btn btn-primary" value="Create Resource" />
+                <input type="submit" class="btn btn-primary" value="Edit Resource" />
                 <a class="btn btn-success" asp-asp-page="Index">Resource List</a>
             </div>
         </form>
