@@ -61,7 +61,10 @@
                     </td>
                     <td>
                         <a asp-page="/Resources/Edit" asp-route-id="@resource.Id" class="btn btn-primary">Update</a>
-                        <a asp-page="" asp-route-id="@resource.Id" class="btn btn-warning">Delete</a>
+                        <form method="post" asp-page-handler="Delete" asp-route-id="@resource.Id" class="d-inline" onsubmit="return confirm('Are you sure?');">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+
                     </td>
                 </tr>
             }

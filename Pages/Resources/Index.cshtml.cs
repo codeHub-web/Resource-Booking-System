@@ -24,5 +24,17 @@ namespace Internal_Resource_Booking_System.Pages.Resources
                 Resources = await _dbContext.Resources.ToListAsync();
             }
         }
+
+        public async Task<IActionResult> OnPostDeleteAsync(int id)
+        {
+            var resource = await _dbContext.Resources.FindAsync(id);
+            if (resource != null)
+            {
+                _dbContext.Resources.Remove(resource);
+                await _dbContext.SaveChangesAsync();
+            }
+            return RedirectToPage();
+        }
+
     }
 }

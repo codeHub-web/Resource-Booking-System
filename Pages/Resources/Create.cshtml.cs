@@ -31,6 +31,7 @@ namespace Internal_Resource_Booking_System.Pages.Resources
             {
                 return Page();
             }
+
             _dBContext.Resources.Add(Resources);
             await _dBContext.SaveChangesAsync();
             return RedirectToPage(nameof(Index));
